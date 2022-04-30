@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/popup_id"
+    android:orientation="vertical"
+    tools:ignore="MissingClass">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:padding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/ap_tittle"
+                android:text="Student Report"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/report_stdntid"
+                android:layout_below="@id/ap_tittle"
+                android:layout_width="match_parent"
+                android:hint="Student Registration_no"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/report_info"
+                android:layout_below="@id/report_stdntid"
+                android:layout_width="match_parent"
+                android:hint="Write your Report here"
+                android:layout_height="200dp"/>
+
+            <Button
+                android:id="@+id/report_submit"
+                android:layout_below="@id/report_info"
+                android:text="SUBMIT"
+                android:layout_marginTop="9dp"
+                android:background="@color/design_default_color_primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

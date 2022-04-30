@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup_id"
+    android:orientation="vertical"
+    tools:ignore="MissingClass">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:padding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ap_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Student Information"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/registration_no"
+                android:text="Enter Request Info"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ap_tittle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/student_fname"
+                android:text="Enter Request Info"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/registration_no"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/student_lname"
+                android:text="Enter Request Info"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_fname"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/programme"
+                android:text="Enter Request Info"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_lname"/>
+
+
+            <TextView
+                android:id="@+id/studentid_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ap_tittle"
+                android:layout_toLeftOf="@id/student_lname"
+                android:paddingRight="30dp"
+                android:paddingTop="6dp"
+                android:text="Sudent_ID" />
+
+                <TextView
+                    android:id="@+id/studentfnm_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/studentid_info"
+                    android:layout_toLeftOf="@id/student_lname"
+                    android:paddingRight="30dp"
+                    android:text="First Name" />
+
+                <TextView
+                    android:id="@+id/studentlname_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/studentfnm_info"
+                    android:layout_toLeftOf="@id/student_lname"
+                    android:paddingRight="30dp"
+                    android:paddingTop="4dp"
+                    android:text="Last Name" />
+
+            <TextView
+                android:id="@+id/programme_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/studentlname_info"
+                android:layout_toLeftOf="@id/student_lname"
+                android:paddingRight="30dp"
+                android:paddingTop="4dp"
+                android:text="Programme" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
