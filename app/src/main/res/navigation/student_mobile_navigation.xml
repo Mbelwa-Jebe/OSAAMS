@@ -7,55 +7,55 @@
 
     <fragment
         android:id="@+id/student_nav_home"
-        android:name="com.touchizen.OSAAMS.ui.student_home.Student_HomeFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_home.Student_HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/student_fragment_home" />
 
     <fragment
         android:id="@+id/student_nav_advisor"
-        android:name="com.touchizen.OSAAMS.ui.student_advisor.Student_AdvisorFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_advisor.Student_AdvisorFragment"
         android:label="Advisor"
         tools:layout="@layout/student_fragment_advisor" />
 
     <fragment
         android:id="@+id/student_nav_chats"
-        android:name="com.touchizen.OSAAMS.ui.student_chats.Student_ChatsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_chats.Student_ChatsFragment"
         android:label="Chats"
         tools:layout="@layout/student_fragment_chats" />
 
     <fragment
         android:id="@+id/student_nav_appointments"
-        android:name="com.touchizen.OSAAMS.ui.student_appoitments.Student_AppointmentsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_appoitments.Student_AppointmentsFragment"
         android:label="Appointments"
         tools:layout="@layout/student_fragment_appointments" />
 
     <fragment
         android:id="@+id/student_nav_consultations"
-        android:name="com.touchizen.OSAAMS.ui.student_consultations.Student_ConsultationsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_consultations.Student_ConsultationsFragment"
         android:label="Consultations"
         tools:layout="@layout/student_fragment_consultations" />
 
     <fragment
         android:id="@+id/student_nav_faqs"
-        android:name="com.touchizen.OSAAMS.ui.student_faqs.Student_FaqsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_faqs.Student_FaqsFragment"
         android:label="FAQs"
         tools:layout="@layout/student_fragment_faqs" />
 
     <fragment
         android:id="@+id/student_bottom_home"
-        android:name="com.touchizen.OSAAMS.ui.student_home.Student_HomeFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_home.Student_HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/student_fragment_home" />
 
     <fragment
         android:id="@+id/student_bottom_dashboard"
-        android:name="com.touchizen.OSAAMS.ui.student_dashboard.Student_DashboardFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_dashboard.Student_DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/student_fragment_dashboard" />
 
     <fragment
         android:id="@+id/student_bottom_notifications"
-        android:name="com.touchizen.OSAAMS.ui.student_notifications.Student_NotificationsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.student_notifications.Student_NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/student_fragment_notifications" />
 </navigation>

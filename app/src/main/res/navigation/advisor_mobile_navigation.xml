@@ -7,55 +7,55 @@
 
     <fragment
         android:id="@+id/advisor_nav_home"
-        android:name="com.touchizen.OSAAMS.ui.advisor_home.AdvisorHomeFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_home.AdvisorHomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/advisor_fragment_home" />
 
     <fragment
         android:id="@+id/advisor_nav_students"
-        android:name="com.touchizen.OSAAMS.ui.advisor_students.AdvisorStudentsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_students.AdvisorStudentsFragment"
         android:label="Students"
         tools:layout="@layout/advisor_fragment_students" />
 
     <fragment
         android:id="@+id/advisor_nav_chats"
-        android:name="com.touchizen.OSAAMS.ui.advisor_chats.AdvisorChatsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_chats.AdvisorChatsFragment"
         android:label="Chats"
         tools:layout="@layout/advisor_fragment_chats" />
 
     <fragment
         android:id="@+id/advisor_nav_appointments"
-        android:name="com.touchizen.OSAAMS.ui.advisor_appointments.AdvisorAppointmentsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_appointments.AdvisorAppointmentsFragment"
         android:label="Appointments"
         tools:layout="@layout/advisor_fragment_appointments" />
 
     <fragment
         android:id="@+id/advisor_nav_consultations"
-        android:name="com.touchizen.OSAAMS.ui.advisor_consultations.AdvisorConsultationsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_consultations.AdvisorConsultationsFragment"
         android:label="Consultations"
         tools:layout="@layout/advisor_fragment_consultations" />
 
     <fragment
         android:id="@+id/advisor_nav_faqs"
-        android:name="com.touchizen.OSAAMS.ui.advisor_faqs.AdvisorFaqsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_faqs.AdvisorFaqsFragment"
         android:label="FAQs"
         tools:layout="@layout/advisor_fragment_faqs" />
 
     <fragment
         android:id="@+id/advisor_bottom_home"
-        android:name="com.touchizen.OSAAMS.ui.advisor_home.AdvisorHomeFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_home.AdvisorHomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/advisor_fragment_home" />
 
     <fragment
         android:id="@+id/advisor_bottom_dashboard"
-        android:name="com.touchizen.OSAAMS.ui.advisor_dashboard.AdvisorDashboardFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_dashboard.AdvisorDashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/advisor_fragment_dashboard" />
 
     <fragment
         android:id="@+id/advisor_bottom_notifications"
-        android:name="com.touchizen.OSAAMS.ui.advisor_notifications.AdvisorNotificationsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_notifications.AdvisorNotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/advisor_fragment_notifications" />
 </navigation>
