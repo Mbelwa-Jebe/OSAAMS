@@ -34,14 +34,19 @@ public class AdvisorMainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
+    public String registration_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advisor_activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        // String reg_no;
+        registration_no= bundle.getString("KEY_REGNO");
+
         initToolbar();
-        initFab();
+       // initFab();
         initNavigation();
         //showBottomNavigation(false);
     }
@@ -53,18 +58,18 @@ public class AdvisorMainActivity extends AppCompatActivity {
 
     }
 
-    private void initFab() {
-
-        FloatingActionButton fab = findViewById(R.id.advisor_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-    }
+//    private void initFab() {
+//
+//        FloatingActionButton fab = findViewById(R.id.advisor_fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+//
+//    }
 
     private void initNavigation() {
 
@@ -138,6 +143,10 @@ public class AdvisorMainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+    }
+
+    public String getRegno(){
+        return registration_no;
     }
 
 }

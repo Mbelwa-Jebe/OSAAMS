@@ -28,15 +28,27 @@ public class StudentMainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
+    public String registration_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        // String reg_no;
+        registration_no= bundle.getString("KEY_REGNO");
+
+
+
+
         initToolbar();
-        initFab();
+       // initFab();
         initNavigation();
+    }
+
+    public String getRegno(){
+        return registration_no;
     }
 
     private void initToolbar() {
@@ -48,7 +60,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
     private void initFab() {
 
-        FloatingActionButton fab = findViewById(R.id.student_fab);
+        FloatingActionButton fab = findViewById(R.id.student_ap_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
