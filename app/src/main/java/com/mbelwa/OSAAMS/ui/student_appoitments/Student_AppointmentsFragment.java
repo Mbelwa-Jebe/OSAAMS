@@ -22,6 +22,7 @@ import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.ap_adapter;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.ui.advisor_appointments.AdvisorAppointmentsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,13 +71,13 @@ public class Student_AppointmentsFragment extends Fragment {
         student_appointmentsViewModel =
                 ViewModelProviders.of(this).get(student_AppointmentsViewModel.class);
         View root = inflater.inflate(R.layout.student_fragment_appointments, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        student_appointmentsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+       // final TextView textView = root.findViewById(R.id.text_tools);
+       // student_appointmentsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+           // @Override
+           // public void onChanged(@Nullable String s) {
+               // textView.setText(s);
+           // }
+       // });
 
 
 
@@ -161,6 +163,11 @@ public class Student_AppointmentsFragment extends Fragment {
                 };
                 RequestQueue requestQueue1 = Volley.newRequestQueue(getContext());
                 requestQueue1.add(stringRequest1);
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setReorderingAllowed(false);
+                transaction.detach(Student_AppointmentsFragment.this).attach(Student_AppointmentsFragment.this).commitAllowingStateLoss();
+
 
             }
         });

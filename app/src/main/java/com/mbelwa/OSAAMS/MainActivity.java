@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     openProfile();
 
                                 } else {
-                                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, "check your userneme or password", Toast.LENGTH_LONG).show();
                                 }
                             }
                         },

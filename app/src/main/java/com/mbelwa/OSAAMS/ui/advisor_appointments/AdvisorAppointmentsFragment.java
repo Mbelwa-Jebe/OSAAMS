@@ -1,6 +1,8 @@
 package com.mbelwa.OSAAMS.ui.advisor_appointments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,14 +48,15 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private EditText requstinfo;
+    private EditText requstinfo,studentid;
     private Button submitap;
     private RecyclerView recyclerView;
     private com.mbelwa.OSAAMS.adapters.ap_adapter ap_adapter;
     //public TextView regnoap;
-    public String registration_no, request_info, post_url1;
+    public String registration_no, request_info,student_id, post_url1;
     public static final String KEY_REGNO = "registration_no";
     public static final String KEY_REQUESTINFO = "request_info";
+    public static final String KEY_STUDENTID = "student_id";
 
     private List<Appointment> list;
 
@@ -80,6 +84,7 @@ public class AdvisorAppointmentsFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
 
+
         getAppointment();
 
         FloatingActionButton fab = root.findViewById(R.id.advisor_ap_fab);
@@ -102,9 +107,10 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
     private void createPopupDialog(){
         dialogBuilder = new AlertDialog.Builder(this.getContext());
-        View view = getLayoutInflater().inflate(R.layout.popup_appointment,null);
-        requstinfo = (EditText) view.findViewById(R.id.requstinfo_id);
-        submitap = (Button) view.findViewById(R.id.ap_submit);
+        View view = getLayoutInflater().inflate(R.layout.advisor_popup_appointment,null);
+        requstinfo = (EditText) view.findViewById(R.id.requstinfo_id_ap);
+        studentid = (EditText) view.findViewById(R.id.student_id_ap);
+        submitap = (Button) view.findViewById(R.id.ad_submit_ap);
 
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
@@ -116,13 +122,16 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
                 submitapAppointment(v);
 
+
             }
 
             private void submitapAppointment(View v) {
                 request_info = requstinfo.getText().toString().trim();
+                student_id = studentid.getText().toString().trim();
+                Log.e("submit","sbmit");
+                Log.v("submit","sbmit");
 
-
-                post_url1 ="http://192.168.137.1:88/AcademicAdvisor/insertap1.php";
+                post_url1 ="http://192.168.137.1:88/AcademicAdvisor/insertap2.php";
                 StringRequest stringRequest1 = new StringRequest(Request.Method.POST, post_url1, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -149,12 +158,32 @@ public class AdvisorAppointmentsFragment extends Fragment {
                         Map<String,String> map = new HashMap<>();
                         map.put(KEY_REGNO,registration_no);
                         map.put(KEY_REQUESTINFO,request_info);
+                        map.put(KEY_STUDENTID,student_id);
                         return map;
                     }
+
 
                 };
                 RequestQueue requestQueue1 = Volley.newRequestQueue(getContext());
                 requestQueue1.add(stringRequest1);
+
+                ap_adapter.notifyItemInserted(list.size());
+                ap_adapter.notifyDataSetChanged();
+               // Fragment frg = null;
+                //frg = getFragmentManager().findFragmentByTag("AdvisorAppointmentsFragment.java");
+                //final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                //ft.detach(frg);
+                //ft.attach(frg);
+                //ft.commit();
+
+              // FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
+               // t.setAllowOptimization(false);
+               // t.detach(Context.th).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
+
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setReorderingAllowed(false);
+                transaction.detach(AdvisorAppointmentsFragment.this).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
 
             }
         });
@@ -164,6 +193,7 @@ public class AdvisorAppointmentsFragment extends Fragment {
     public void getAppointment(){
 
         list = new ArrayList<>();
+
 
         String  ap_url = "http://192.168.137.1:88/AcademicAdvisor/get_appointments.php";
         JsonObjectRequest jsonObjectRequest;
@@ -198,8 +228,9 @@ public class AdvisorAppointmentsFragment extends Fragment {
                     }
 
                     ap_adapter = new ap_adapter(getContext(),list);
+
                     recyclerView.setAdapter(ap_adapter);
-                    ap_adapter.notifyDataSetChanged();
+
 
 
                     // if (null != callBack)callBack.processFinish(appointments);

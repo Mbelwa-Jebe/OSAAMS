@@ -1,9 +1,12 @@
 package com.mbelwa.OSAAMS;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -22,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 public class AdvisorMainActivity extends AppCompatActivity {
 
@@ -122,6 +126,25 @@ public class AdvisorMainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.advisor_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        Log.e("menu","menu");
+        Log.v("menu","menu");
+        switch (item.getItemId()){
+            case R.id.ad_logout:
+                Toast.makeText(AdvisorMainActivity.this, "log_out", Toast.LENGTH_LONG).show();
+                Intent intent8 = new Intent(AdvisorMainActivity.this, MainActivity.class);
+                AdvisorMainActivity.this.startActivity(intent8);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     @Override

@@ -1,8 +1,15 @@
 package com.mbelwa.OSAAMS;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -10,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
@@ -29,6 +37,8 @@ public class StudentMainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
     public String registration_no;
+    private TextView student_logged_in;
+    private MenuView.ItemView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,13 @@ public class StudentMainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         // String reg_no;
         registration_no= bundle.getString("KEY_REGNO");
-
+        String user = "1234";
+       // student_logged_in = (TextView) findViewById(R.id.student_logged_in);
+      //  student_logged_in.setText("hello");
+      //  View header = navigationView.getHeaderView(0);
+      //  TextView student_logged_in = (TextView) header.findViewById(R.id.student_logged_in);
+       // student_logged_in.setText(registration_no);
+      //NavigationView navigationView = findViewById(R.id.student_nav_header_main_layout);
 
 
 
@@ -92,6 +108,9 @@ public class StudentMainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         NavigationUI.setupWithNavController(bottomNavView, navController);
 
+       // logout = (MenuView.ItemView) findViewById(R.id.student_nav_logout);
+
+
 
         animateNavigationDrawer();
     }
@@ -122,8 +141,30 @@ public class StudentMainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.student_main, menu);
+       // getMenuInflater().inflate(R.menu.student_main, menu);
+        MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.student_main, menu);
+
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        Log.e("menu","menu");
+        Log.v("menu","menu");
+        switch (item.getItemId()){
+            case R.id.student_logout:
+                Toast.makeText(StudentMainActivity.this, "log_out", Toast.LENGTH_LONG).show();
+                Intent intent8 = new Intent(StudentMainActivity.this, MainActivity.class);
+                StudentMainActivity.this.startActivity(intent8);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     @Override
@@ -144,4 +185,6 @@ public class StudentMainActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

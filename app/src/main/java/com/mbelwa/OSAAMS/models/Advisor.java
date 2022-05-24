@@ -6,6 +6,24 @@ public class Advisor {
     private String advisor_id;
     private String advisor_office;
     private String advisor_rank;
+    private String student_id;
+    private String contacts;
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
 
     public String getAdvisor_fname() {
         return advisor_fname;

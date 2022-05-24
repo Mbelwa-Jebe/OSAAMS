@@ -70,7 +70,7 @@
                 android:layout_toLeftOf="@id/advisor_id"
                 android:paddingRight="30dp"
                 android:paddingTop="6dp"
-                android:text="Advisor ID" />
+                android:text="First Name" />
 
             <TextView
                 android:id="@+id/studentfnm_info"
@@ -79,7 +79,7 @@
                 android:layout_below="@id/studentid_info"
                 android:layout_toLeftOf="@id/advisor_fname"
                 android:paddingRight="30dp"
-                android:text="First Name" />
+                android:text="Last Name" />
 
             <TextView
                 android:id="@+id/studentlname_info"
@@ -89,7 +89,7 @@
                 android:layout_toLeftOf="@id/advisor_lname"
                 android:paddingRight="30dp"
                 android:paddingTop="4dp"
-                android:text="Last Name" />
+                android:text="Contacts" />
 
             <TextView
                 android:id="@+id/programme_info"

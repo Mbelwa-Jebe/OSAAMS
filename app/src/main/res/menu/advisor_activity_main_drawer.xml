@@ -12,18 +12,23 @@
             android:id="@+id/advisor_nav_students"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Students" />
-        <item
-            android:id="@+id/advisor_nav_chats"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Chats" />
+
         <item
             android:id="@+id/advisor_nav_appointments"
             android:icon="@drawable/ic_menu_manage"
             android:title="Appointments" />
+
         <item
             android:id="@+id/advisor_nav_consultations"
             android:icon="@drawable/ic_menu_share"
             android:title="Consultations" />
+
+        <item
+            android:id="@+id/advisor_nav_chats"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Chats" />
+
+
         <item
             android:id="@+id/advisor_nav_faqs"
             android:icon="@drawable/ic_menu_send"

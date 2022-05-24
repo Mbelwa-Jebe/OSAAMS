@@ -42,6 +42,13 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
         holder.report_studentid.setText(report.getStudent_id());
         holder.report.setText(report.getReport());
 
+     /*  holder.delete_report.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+
     }
 
     @Override
@@ -63,8 +70,8 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
             report_studentid = itemView.findViewById(R.id.report_studentid);
             report = itemView.findViewById(R.id.report);
 
-            edit_report = itemView.findViewById(R.id.edit_report);
-            delete_report = itemView.findViewById(R.id.delete_report);
+          //  edit_report = itemView.findViewById(R.id.edit_report);
+          //  delete_report = itemView.findViewById(R.id.delete_report);
         }
     }
 

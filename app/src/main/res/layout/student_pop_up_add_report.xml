@@ -18,29 +18,23 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:id="@+id/ap_tittle"
-                android:text="Enter Request Info"
+                android:id="@+id/student_ap_tittle"
+                android:text="Student Report"
                 android:textSize="18sp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"/>
 
-            <EditText
-                android:id="@+id/requstinfo_id_ap"
-                android:layout_below="@id/ap_tittle"
-                android:layout_width="match_parent"
-                android:hint="Request information"
-                android:layout_height="wrap_content"/>
 
             <EditText
-                android:id="@+id/student_id_ap"
-                android:layout_below="@id/requstinfo_id_ap"
+                android:id="@+id/student_report_info"
+                android:layout_below="@id/student_ap_tittle"
                 android:layout_width="match_parent"
-                android:hint="Student ID"
-                android:layout_height="wrap_content"/>
+                android:hint="Write your Report here"
+                android:layout_height="200dp"/>
 
             <Button
-                android:id="@+id/ad_submit_ap"
-                android:layout_below="@id/student_id_ap"
+                android:id="@+id/student_report_submit"
+                android:layout_below="@id/student_report_info"
                 android:text="SUBMIT"
                 android:layout_marginTop="9dp"
                 android:background="@color/design_default_color_primary"

@@ -3,31 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        >
         <item
             android:id="@+id/student_nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/student_nav_advisor"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_advisor"
             android:title="Advisor" />
         <item
-            android:id="@+id/student_nav_chats"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Chats" />
-        <item
             android:id="@+id/student_nav_appointments"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Appointments" />
+            android:icon="@drawable/ic_appointment"
+            android:title="Appointments"
+            android:visible="true" />
+
         <item
             android:id="@+id/student_nav_consultations"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_consultations"
             android:title="Consultations" />
+
+        <item
+            android:id="@+id/student_nav_chats"
+            android:icon="@drawable/ic_chats"
+            android:title="Chats" />
+
+
         <item
             android:id="@+id/student_nav_faqs"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_faqs"
             android:title="FAQs" />
+
     </group>
 
 

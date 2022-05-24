@@ -10,7 +10,7 @@ public class AdvisorHomeViewModel extends ViewModel {
 
     public AdvisorHomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("OSAAM ADVISOR");
     }
 
     public LiveData<String> getText() {

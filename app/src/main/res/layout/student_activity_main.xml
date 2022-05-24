@@ -16,15 +16,17 @@
         android:layout_height="match_parent" />
 
 
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/student_nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/student_activity_main_drawer"
-            app:headerLayout="@layout/student_nav_header_main"
-            />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/student_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/sidebar"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/student_nav_header_main"
+        app:itemIconTint="@color/background"
+        app:itemShapeFillColor="#FFFFFF"
+        app:itemTextColor="#FFFFFF"
+        app:menu="@menu/student_activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -149,7 +149,7 @@ public class AdvisorConsultationsFragment extends Fragment {
 
     private void createPopupDialog() {
         dialogBuilder = new AlertDialog.Builder(getContext());
-        View view = getLayoutInflater().inflate(R.layout.pop_up_add_report,null);
+        View view = getLayoutInflater().inflate(R.layout.advisor_pop_up_add_report,null);
         stdnt_id = (EditText) view.findViewById(R.id.report_stdntid);
         report_info = (EditText) view.findViewById(R.id.report_info);
         submit_report = (Button) view.findViewById(R.id.report_submit);

@@ -18,8 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/sidebar"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/advisor_nav_header_main"
+        app:itemBackground="@color/sidebar"
+        app:itemIconTint="@color/background"
+        app:itemTextColor="#FFFFFF"
         app:menu="@menu/advisor_activity_main_drawer" />
 
 

@@ -4,7 +4,7 @@ class API {
     function select(){
         $db = new Connect;
         $advisors = array();
-        $data = $db->prepare('SELECT * FROM advisors ');
+        $data = $db->prepare('SELECT * FROM students,advisors WHERE students.advisor_id = advisors.advisor_id GROUP BY `registration_no`');
         $data->execute();
 
         while($OutputData = $data->fetch(PDO::FETCH_ASSOC)){
@@ -16,6 +16,7 @@ class API {
                     'advisor_id' => $OutputData['advisor_id'],
                     'advisor_office' => $OutputData['advisor_office'],
                     'advisor_rank' => $OutputData['advisor_rank'],
+                    'student_id' => $OutputData['registration_no'],
     
             ));
        
