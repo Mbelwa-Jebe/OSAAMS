@@ -217,13 +217,12 @@ public class AdvisorAppointmentsFragment extends Fragment {
                         appointment.setStudent_fname(apObject.getString("student_fname"));
                         appointment.setStudent_lname(apObject.getString("student_lname"));
                         appointment.setTimestamp(apObject.getString("time_stamp"));
+                        appointment.setAp_from(apObject.getString("ap_from"));
 
-                        if(registration_no.equals(appointment.getStudent_id())){
+                        if(registration_no.equals(appointment.getAp_from())){
                             list.add(appointment);
                         }
-                        else if(registration_no.equals(appointment.getAdvisor_id())){
-                            list.add(appointment);
-                        }
+
 
                     }
 
