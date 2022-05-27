@@ -1,9 +1,12 @@
 package com.mbelwa.OSAAMS.ui.student_faqs;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -23,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -40,6 +44,7 @@ public class Student_FaqsFragment extends Fragment {
     private RecyclerView recyclerView;
     private Faqs_adapter faqs_adapter;
     private List<Faqs> list;
+    private EditText editText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,16 +59,70 @@ public class Student_FaqsFragment extends Fragment {
             }
         });
 
+        //intitialize recyclerview
         recyclerView = (RecyclerView)root.findViewById(R.id.faq_recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         getFaqs();
+
+        EditText editText = (EditText) root.findViewById(R.id.editSearch);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            //Action after detecting text change
+
+                filter(s.toString());
+
+            }
+        });
         return root;
     }
 
+    private void filter(String text){
+
+        //Filtered search for each word in user input
+        String[] input1 = text.split(" ");
+        for(String ch: input1){
+            ArrayList<Faqs> filteredList = new ArrayList<>();
+            for (Faqs item : list){
+                if (item.getFaqs_answer().toLowerCase().contains(ch.toLowerCase())){
+                filteredList.add(item);
+             }
+
+            }
+            faqs_adapter.filteredList(filteredList);
+        }
+
+
+
+
+            // NormalSearch
+//             if (item.getFaqs_answer().toLowerCase().contains(text.toLowerCase().replaceAll(" ",""))){
+//                 filteredList.add(item);
+//             }
+
+
+       //  }
+
+           // faqs_adapter.filteredList(filteredList);
+    }
+
+        //Pulling Faqs
     private void getFaqs() {
         list = new ArrayList<>();
+
+        //Pulling Faqs from database
         String student_url = "http://192.168.137.1:88/AcademicAdvisor/get_faqs.php";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, student_url
                 , null, new Response.Listener<JSONObject>() {
@@ -81,7 +140,7 @@ public class Student_FaqsFragment extends Fragment {
 
                     }
 
-
+                //connect adapter
                     faqs_adapter = new Faqs_adapter(getContext(),list);
                     recyclerView.setAdapter(faqs_adapter);
 

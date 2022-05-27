@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.models.Faqs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,11 @@ public class Faqs_adapter extends RecyclerView.Adapter<Faqs_adapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void filteredList(ArrayList<Faqs> filteredList){
+        list = filteredList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
