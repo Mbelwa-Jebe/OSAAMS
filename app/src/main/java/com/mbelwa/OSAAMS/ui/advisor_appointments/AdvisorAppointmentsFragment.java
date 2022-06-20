@@ -24,6 +24,7 @@ import com.mbelwa.OSAAMS.AdvisorMainActivity;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.adapters.ap_adapter;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,10 +129,16 @@ public class AdvisorAppointmentsFragment extends Fragment {
             private void submitapAppointment(View v) {
                 request_info = requstinfo.getText().toString().trim();
                 student_id = studentid.getText().toString().trim();
-                Log.e("submit","sbmit");
-                Log.v("submit","sbmit");
+                if (request_info.length() == 0) {
+                    requstinfo.setError("Fill Request info first");
 
-                post_url1 ="http://192.168.137.1:88/AcademicAdvisor/insertap2.php";
+                } else if (student_id.length() == 0) {
+                    studentid.setError("Fill Student ID first");
+                }
+
+                else{
+
+                        post_url1 = URL.ADD_AP_ADVISOR_URL;
                 StringRequest stringRequest1 = new StringRequest(Request.Method.POST, post_url1, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -151,14 +158,13 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
                             }
                         }
-                )
-                {
+                ) {
                     @Override
-                    protected Map<String, String> getParams()throws AuthFailureError {
-                        Map<String,String> map = new HashMap<>();
-                        map.put(KEY_REGNO,registration_no);
-                        map.put(KEY_REQUESTINFO,request_info);
-                        map.put(KEY_STUDENTID,student_id);
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put(KEY_REGNO, registration_no);
+                        map.put(KEY_REQUESTINFO, request_info);
+                        map.put(KEY_STUDENTID, student_id);
                         return map;
                     }
 
@@ -169,22 +175,22 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
                 ap_adapter.notifyItemInserted(list.size());
                 ap_adapter.notifyDataSetChanged();
-               // Fragment frg = null;
+                // Fragment frg = null;
                 //frg = getFragmentManager().findFragmentByTag("AdvisorAppointmentsFragment.java");
                 //final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 //ft.detach(frg);
                 //ft.attach(frg);
                 //ft.commit();
 
-              // FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
-               // t.setAllowOptimization(false);
-               // t.detach(Context.th).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
+                // FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
+                // t.setAllowOptimization(false);
+                // t.detach(Context.th).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
 
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.setReorderingAllowed(false);
                 transaction.detach(AdvisorAppointmentsFragment.this).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
-
+            }
             }
         });
     }
@@ -195,7 +201,7 @@ public class AdvisorAppointmentsFragment extends Fragment {
         list = new ArrayList<>();
 
 
-        String  ap_url = "http://192.168.137.1:88/AcademicAdvisor/get_appointments.php";
+        String  ap_url = URL.GET_AP_URL;
         JsonObjectRequest jsonObjectRequest;
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ap_url,
                 null, new Response.Listener<JSONObject>(){

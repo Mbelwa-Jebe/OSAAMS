@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.models.Report;
+import com.mbelwa.OSAAMS.models.URL;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +34,13 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
     Context context;
     List<Report> list;
     public static  final String KEY_AP_ID="consultation_id";
+    public static  final String KEY_UPDATED_REPORT="updated_report";
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
     private LayoutInflater inflater;
     public int report_id;
+    public String updated_submission;
+    public EditText updated_report;
 
     public Report_adapter_student(Context context, List<Report> list) {
         this.context = context;
@@ -74,7 +79,8 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
           @Override
           public void onClick(View v) {
               Toast.makeText(context,"edited",Toast.LENGTH_SHORT).show();
-
+              report_id = holder.getAdapterPosition();
+                updateToServer(list.get(report_id).getConsultation_id());
           }
       });
 
@@ -135,7 +141,7 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
             public void onClick(View v) {
 
 
-                String delete_ap = "http://192.168.137.1:88/AcademicAdvisor/delete_report.php";
+                String delete_ap = URL.DELETE_REPORT_URL;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, delete_ap,
                         new Response.Listener<String>() {
                             @Override
@@ -177,6 +183,100 @@ public class Report_adapter_student extends RecyclerView.Adapter<Report_adapter_
 
 
 
+    }
+
+
+    public void updateToServer(final String reprt_id){
+        // public String final String KEY_AP_ID = "ap_id";
+        alertDialogBuilder = new AlertDialog.Builder(context);
+
+        inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.update_report_dialog,null);
+
+
+         updated_report = (EditText) view.findViewById(R.id.updated_report);
+       // updated_report.setText(list.get(report_id).getReport().toString().trim());
+
+        Button update = (Button) view.findViewById(R.id.button_update);
+        Button cancel = (Button) view.findViewById(R.id.button_cancel);
+
+
+        alertDialogBuilder.setView(view);
+        dialog = alertDialogBuilder.create();
+        updated_report.setText(list.get(report_id).getReport().toString().trim());
+        notifyItemRangeChanged(report_id,list.size());
+
+        dialog.show();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                updated_submission = updated_report.getText().toString().trim();
+                if (updated_submission.length() == 0) {
+                        updated_report.setError("Fill Report first");
+                }
+
+                else{
+
+                // updated_report.setText(list.get(report_id).getReport().toString().trim());
+
+                notifyItemRangeChanged(report_id, list.size());
+                updated_submission = updated_report.getText().toString().trim();
+                String update_rep = URL.UPDATE_REPORT_URL;
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, update_rep,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if (response.trim().equals("success")) {
+                                    Toast.makeText(context, "successful update", Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    Toast.makeText(context, "not successful", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(context, "error", Toast.LENGTH_LONG).show();
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put(KEY_AP_ID, reprt_id);
+                        map.put(KEY_UPDATED_REPORT, updated_submission);
+                        return map;
+                    }
+
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                requestQueue.add(stringRequest);
+                refresh();
+                dialog.dismiss();
+                notifyItemRangeChanged(report_id, list.size());
+
+            }
+
+            }
+
+        });
+
+
+
+
+
+    }
+    public void refresh(){
     }
 
 }

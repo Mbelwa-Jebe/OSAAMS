@@ -6,7 +6,7 @@ require_once 'connection.php';
 
    // $apointment_id = trim($_POST['appointment_id']) ;
   
-   $apointment_id = "4";
+   $apointment_id = "30";
    $response = "rejected";
 
      $sql = "UPDATE `appointments` SET `response` = '$response' WHERE `appointments`.`appointment_id` = '$apointment_id'" ;

@@ -22,6 +22,7 @@ import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.Report_adapter_student;
 import com.mbelwa.OSAAMS.models.Report;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -104,7 +106,7 @@ public class Student_ConsultationsFragment extends Fragment {
     private void getReports() {
         list = new ArrayList<>();
 
-        String  get_report_url = "http://192.168.137.1:88/AcademicAdvisor/get_reports.php";
+        String  get_report_url = URL.GET_REPORT_URL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, get_report_url,
                 null, new Response.Listener<JSONObject>() {
             @Override
@@ -131,8 +133,14 @@ public class Student_ConsultationsFragment extends Fragment {
                         }
                     }
 
-                    student_report_adapter = new Report_adapter_student(getContext(),list);
+                    student_report_adapter = new Report_adapter_student(getContext(),list) {
+                        @Override
+                        public void refresh(){
+                            refreshFragment();
+                        }
+                    };
                     recyclerView.setAdapter(student_report_adapter);
+                    student_report_adapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -170,9 +178,14 @@ public class Student_ConsultationsFragment extends Fragment {
 
             private void submitReport(View v) {
                 report = report_info.getText().toString().trim();
-               // report_stdntid = stdnt_id.getText().toString().trim();
+                // report_stdntid = stdnt_id.getText().toString().trim();
 
-                String  post_report_url = "http://192.168.137.1:88/AcademicAdvisor/insert_reports_student.php";
+                if (report.length() == 0) {
+                        report_info.setError("Fill your report first");
+                }
+                else {
+
+                String post_report_url = URL.ADD_REPORT_STUDENT_URL;
                 StringRequest stringRequest5 = new StringRequest(Request.Method.POST, post_report_url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -186,33 +199,42 @@ public class Student_ConsultationsFragment extends Fragment {
                         }
                     }
                 },
-                        new Response.ErrorListener(){
+                        new Response.ErrorListener() {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
                             }
-                        })
-                {
+                        }) {
                     @Override
-                    protected Map<String, String> getParams()throws AuthFailureError {
-                        Map<String,String> map = new HashMap<>();
-                       // map.put(KEY_STDNT_ID,report_stdntid);
-                        map.put(KEY_REPORT_INFO,report);
-                        map.put(KEY_ADV_REGNO,registration_no);
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        // map.put(KEY_STDNT_ID,report_stdntid);
+                        map.put(KEY_REPORT_INFO, report);
+                        map.put(KEY_ADV_REGNO, registration_no);
                         return map;
                     }
 
 
                 };
+                student_report_adapter.notifyDataSetChanged();
+                refreshFragment();
 
                 RequestQueue requestQueue5 = Volley.newRequestQueue(getContext());
                 requestQueue5.add(stringRequest5);
-
+            }
             }
 
         });
 
+
+    }
+
+    // refresh the changes
+    public void refreshFragment(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.setReorderingAllowed(false);
+        transaction.detach(this).attach(this).commitAllowingStateLoss();
 
     }
 }

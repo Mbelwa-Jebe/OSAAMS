@@ -22,6 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.mbelwa.OSAAMS.MainActivity;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 
 import java.util.HashMap;
 import java.util.List;
@@ -130,7 +131,7 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
             public void onClick(View v) {
 
 
-                String delete_ap = "http://192.168.137.1:88/AcademicAdvisor/delete_appointment.php";
+                String delete_ap = URL.DELETE_AP_URL;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, delete_ap,
                         new Response.Listener<String>() {
                             @Override

@@ -18,13 +18,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mbelwa.OSAAMS.models.URL;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String LOGIN_URL = "http://192.168.137.1:88/AcademicAdvisor/login2.php";
+    public static final String LOGIN_URL = URL.LOGIN_URL;
     public static  final String KEY_REGNO="registration_no";
     public static final String KEY_PASSWORD="password";
     EditText etName, etPassword;
@@ -56,38 +57,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 registration_no = etName.getText().toString().trim();
                 password = etPassword.getText().toString().trim();
 
+                if (registration_no.length() == 0  ) {
+                    etName.setError("Fill your Credentials first");
+                }
+                else if (password.length() == 0){
+                    etPassword.setError("Enter your password first");
+                }
+
+                else {
+
+
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
-                        new Response.Listener<String>()  {
+                        new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                if (response.trim().equals("success")) {
+                                if (response.trim().equals("student")) {
                                     openProfile();
 
+                                } else if (response.trim().equals("advisor")) {
+                                    openProfile2();
                                 } else {
-                                    Toast.makeText(MainActivity.this, "check your userneme or password", Toast.LENGTH_LONG).show();
+                                    etName.setError("Enter correct Username");
+                                    etPassword.setError("Enter correct Password");
+                                   // Toast.makeText(MainActivity.this, "check your userneme or password", Toast.LENGTH_LONG).show();
                                 }
                             }
                         },
-                        new Response.ErrorListener (){
+                        new Response.ErrorListener() {
                             @Override
-                            public void onErrorResponse(VolleyError error){
-                                Toast.makeText(MainActivity.this, "error", Toast.LENGTH_LONG).show();
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
 
                             }
-                        })
-                {
+                        }) {
                     @Override
-                    protected Map<String, String> getParams()throws AuthFailureError {
-                        Map<String,String> map = new HashMap<>();
-                        map.put(KEY_REGNO,registration_no);
-                        map.put(KEY_PASSWORD,password);
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put(KEY_REGNO, registration_no);
+                        map.put(KEY_PASSWORD, password);
                         return map;
                     }
 
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 requestQueue.add(stringRequest);
-
+            }
             }
         });
 
@@ -111,6 +125,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Intent intent = new Intent(MainActivity.this, StudentMainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("KEY_REGNO",registration_no);
+        intent.putExtras(bundle);
+        this.startActivity(intent);
+    }
+
+    public void openProfile2(){
+        // Toast.makeText(MainActivity.this, "logged in", Toast.LENGTH_LONG).show();
+
+
+        Intent intent = new Intent(MainActivity.this, AdvisorMainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("KEY_REGNO",registration_no);
         intent.putExtras(bundle);

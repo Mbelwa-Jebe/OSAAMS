@@ -19,6 +19,7 @@ import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.ap_adapter;
 import com.mbelwa.OSAAMS.adapters.ap_notification_adapter;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 import com.mbelwa.OSAAMS.ui.student_appoitments.Student_AppointmentsFragment;
 import com.mbelwa.OSAAMS.ui.student_home.Student_HomeFragment;
 
@@ -84,7 +85,7 @@ public class Student_NotificationsFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        String  ap_url = "http://192.168.137.1:88/AcademicAdvisor/get_appointments.php";
+        String  ap_url = URL.GET_AP_URL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ap_url,
                 null, new Response.Listener<JSONObject>() {
             @Override
@@ -155,7 +156,7 @@ public class Student_NotificationsFragment extends Fragment {
 //            }
 //        },delay);
     }
-
+    //refresh the changes
     public void refreshFragment(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setReorderingAllowed(false);

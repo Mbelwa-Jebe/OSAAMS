@@ -21,7 +21,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mbelwa.OSAAMS.AdvisorMainActivity;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.adapters.Report_adapter_advisor;
+import com.mbelwa.OSAAMS.adapters.Report_adapter_student;
 import com.mbelwa.OSAAMS.models.Report;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +50,7 @@ public class AdvisorConsultationsFragment extends Fragment {
     private EditText stdnt_id,report_info;
     private Button submit_report;
     private RecyclerView recyclerView;
-    private Report_adapter_advisor report_adapter_advisor;
+    private Report_adapter_student report_adapter_advisor;
     //public TextView regnoap;
     public String registration_no,report,report_stdntid;
     private AlertDialog.Builder dialogBuilder;
@@ -100,7 +102,7 @@ public class AdvisorConsultationsFragment extends Fragment {
     public void getReports() {
         list = new ArrayList<>();
 
-        String  get_report_url = "http://192.168.137.1:88/AcademicAdvisor/get_reports.php";
+        String  get_report_url = URL.GET_REPORT_URL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, get_report_url,
                 null, new Response.Listener<JSONObject>() {
             @Override
@@ -127,7 +129,7 @@ public class AdvisorConsultationsFragment extends Fragment {
                         }
                     }
 
-                    report_adapter_advisor = new Report_adapter_advisor(getContext(),list);
+                    report_adapter_advisor = new Report_adapter_student(getContext(),list);
                     recyclerView.setAdapter(report_adapter_advisor);
 
                 } catch (JSONException e) {
@@ -168,7 +170,7 @@ public class AdvisorConsultationsFragment extends Fragment {
                 report = report_info.getText().toString().trim();
                 report_stdntid = stdnt_id.getText().toString().trim();
 
-                String  post_report_url = "http://192.168.137.1:88/AcademicAdvisor/insert_reports.php";
+                String  post_report_url = URL.ADD_REPORT_ADVISOR_URL;
                 StringRequest stringRequest5 = new StringRequest(Request.Method.POST, post_report_url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

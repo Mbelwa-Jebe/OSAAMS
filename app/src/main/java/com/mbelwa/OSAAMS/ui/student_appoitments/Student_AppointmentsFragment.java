@@ -22,6 +22,7 @@ import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.ap_adapter;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 import com.mbelwa.OSAAMS.ui.advisor_appointments.AdvisorAppointmentsFragment;
 
 import org.json.JSONArray;
@@ -129,17 +130,23 @@ public class Student_AppointmentsFragment extends Fragment {
             private void submitapAppointment(View v) {
                 request_info = requstinfo.getText().toString().trim();
 
+                if (request_info.length() == 0) {
+                    requstinfo.setError("fill your request firs");
+                }
 
-                post_url1 ="http://192.168.137.1:88/AcademicAdvisor/insertap1.php";
+                else {
+
+
+                post_url1 = URL.ADD_AP_STUDENT_URL;
                 StringRequest stringRequest1 = new StringRequest(Request.Method.POST, post_url1, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
-                            Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
 
                         } else {
-                            Toast.makeText(getContext(), "error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -150,13 +157,12 @@ public class Student_AppointmentsFragment extends Fragment {
 
                             }
                         }
-                )
-                {
+                ) {
                     @Override
-                    protected Map<String, String> getParams()throws AuthFailureError {
-                        Map<String,String> map = new HashMap<>();
-                        map.put(KEY_REGNO,registration_no);
-                        map.put(KEY_REQUESTINFO,request_info);
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put(KEY_REGNO, registration_no);
+                        map.put(KEY_REQUESTINFO, request_info);
                         return map;
                     }
 
@@ -168,7 +174,7 @@ public class Student_AppointmentsFragment extends Fragment {
                 transaction.setReorderingAllowed(false);
                 transaction.detach(Student_AppointmentsFragment.this).attach(Student_AppointmentsFragment.this).commitAllowingStateLoss();
 
-
+            }
             }
         });
     }
@@ -178,7 +184,7 @@ public class Student_AppointmentsFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        String  ap_url = "http://192.168.137.1:88/AcademicAdvisor/get_appointments.php";
+        String  ap_url = URL.GET_AP_URL;
         JsonObjectRequest jsonObjectRequest;
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ap_url,
                 null, new Response.Listener<JSONObject>(){

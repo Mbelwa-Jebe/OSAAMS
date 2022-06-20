@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 import com.mbelwa.OSAAMS.ui.student_notifications.Student_NotificationsFragment;
 
 import java.util.HashMap;
@@ -109,7 +110,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
 
     private void acceptAppointment(final String ap_id) {
        // Toast.makeText(context,"accepted", LENGTH_LONG).show();
-        String accept_ap = "http://192.168.137.1:88/AcademicAdvisor/accept_appointment.php";
+        String accept_ap = URL.CONFIRM_AP_URL;
 
           StringRequest stringRequest = new StringRequest(Request.Method.POST, accept_ap,
                 new Response.Listener<String>() {
@@ -119,7 +120,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
                             Toast.makeText(context, "successful accepted", Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(context, "not successful", LENGTH_LONG).show();
+                            Toast.makeText(context, "not successful", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -149,7 +150,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
 
     private void rejectAppointment(final String ap_id) {
        // Toast.makeText(context,"accepted", LENGTH_LONG).show();
-        String accept_ap = "http://192.168.137.1:88/AcademicAdvisor/reject_appointment.php";
+        String accept_ap = URL.REJECT_AP_URL;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, accept_ap,
                 new Response.Listener<String>() {

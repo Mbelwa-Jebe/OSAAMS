@@ -20,6 +20,7 @@ import com.mbelwa.OSAAMS.adapters.Faqs_adapter;
 import com.mbelwa.OSAAMS.adapters.Student_adapter;
 import com.mbelwa.OSAAMS.models.Faqs;
 import com.mbelwa.OSAAMS.models.Student;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Student_FaqsFragment extends Fragment {
 
-    private Student_FaqsViewModel sendViewModel;
+    private Student_FaqsViewModel studentsFaqsViewModel;
 
     private RecyclerView recyclerView;
     private Faqs_adapter faqs_adapter;
@@ -48,11 +49,11 @@ public class Student_FaqsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
+        studentsFaqsViewModel =
                 ViewModelProviders.of(this).get(Student_FaqsViewModel.class);
         View root = inflater.inflate(R.layout.student_fragment_faqs, container, false);
         final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        studentsFaqsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -96,7 +97,7 @@ public class Student_FaqsFragment extends Fragment {
         for(String ch: input1){
             ArrayList<Faqs> filteredList = new ArrayList<>();
             for (Faqs item : list){
-                if (item.getFaqs_answer().toLowerCase().contains(ch.toLowerCase())){
+                if (item.getFaqs_answer().toLowerCase().contains(ch.toLowerCase())  || item.getFaqs_question().toLowerCase().contains(ch.toLowerCase()) ){
                 filteredList.add(item);
              }
 
@@ -123,7 +124,7 @@ public class Student_FaqsFragment extends Fragment {
         list = new ArrayList<>();
 
         //Pulling Faqs from database
-        String student_url = "http://192.168.137.1:88/AcademicAdvisor/get_faqs.php";
+        String student_url = URL.GET_FAQS_URL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, student_url
                 , null, new Response.Listener<JSONObject>() {
             @Override

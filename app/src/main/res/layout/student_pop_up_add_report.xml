@@ -27,10 +27,12 @@
 
             <EditText
                 android:id="@+id/student_report_info"
-                android:layout_below="@id/student_ap_tittle"
                 android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/student_ap_tittle"
+                android:gravity="start"
                 android:hint="Write your Report here"
-                android:layout_height="200dp"/>
+                android:textAlignment="viewStart" />
 
             <Button
                 android:id="@+id/student_report_submit"

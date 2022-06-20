@@ -17,6 +17,7 @@ import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.Advisor_adapter;
 import com.mbelwa.OSAAMS.models.Advisor;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,7 +72,7 @@ public class Student_AdvisorFragment extends Fragment {
 
     private void getAdvisors() {
         list = new ArrayList<>();
-        String advisor_url = "http://192.168.137.1:88/AcademicAdvisor/get_advisors.php";
+        String advisor_url = URL.GET_ADVISOR_URL;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, advisor_url
                 , null, new Response.Listener<JSONObject>() {
             @Override

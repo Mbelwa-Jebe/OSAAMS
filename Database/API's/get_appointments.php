@@ -23,6 +23,9 @@ class API {
                     'advisor_lname' => $OutputData['advisor_lname'],
     
                     'advisor_id' => $OutputData['advisor_id'],
+                    'ap_from' => $OutputData['ap_from'],
+                    'ap_to' => $OutputData['ap_to'],
+                    
                     'time_stamp' => $OutputData['timestamp']
             ));
        

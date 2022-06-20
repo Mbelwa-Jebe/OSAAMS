@@ -18,6 +18,7 @@ import com.mbelwa.OSAAMS.R;
 import com.mbelwa.OSAAMS.StudentMainActivity;
 import com.mbelwa.OSAAMS.adapters.ap_notification_adapter;
 import com.mbelwa.OSAAMS.models.Appointment;
+import com.mbelwa.OSAAMS.models.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,7 +75,7 @@ public class AdvisorNotificationsFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        String  ap_url = "http://192.168.137.1:88/AcademicAdvisor/get_appointments.php";
+        String  ap_url = URL.GET_AP_URL;
         JsonObjectRequest jsonObjectRequest;
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ap_url,
                 null, new Response.Listener<JSONObject>(){

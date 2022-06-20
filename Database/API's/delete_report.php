@@ -4,7 +4,7 @@ require_once 'connection.php';
 if($_SERVER['REQUEST_METHOD']=='POST') {
 	
 
-    $consultation_id = trim($_POST['apointment_id']) ;
+    $consultation_id = trim($_POST['consultation_id']) ;
   
   // $apointment_id = "5";
 
