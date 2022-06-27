@@ -41,7 +41,7 @@ public class Student_AdvisorFragment extends Fragment {
     private RecyclerView recyclerView;
     private Advisor_adapter advisor_adapter;
     private List<Advisor> list;
-    public String registration_no;
+    public String registration_no,my_advisor_id;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -88,10 +88,13 @@ public class Student_AdvisorFragment extends Fragment {
                         advisor.setAdvisor_office(advObject.getString("advisor_office"));
                         advisor.setAdvisor_rank(advObject.getString("advisor_rank"));
                         advisor.setStudent_id(advObject.getString("student_id"));
+                        advisor.setContacts(advObject.getString("advisor_contacts"));
                           if(registration_no.equals(advisor.getStudent_id())){
                             list.add(advisor);
                            }
                         //list.add(advisor);
+
+
 
                     }
                     advisor_adapter = new Advisor_adapter(getContext(),list);

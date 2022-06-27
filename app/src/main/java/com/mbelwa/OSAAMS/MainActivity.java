@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etPassword = findViewById(R.id.studentpass);
         btlogin = findViewById(R.id.studentLogin);
         btlogin.setOnClickListener(this);
-        advisorLogin = findViewById(R.id.advisorText);
+//        advisorLogin = findViewById(R.id.advisorText);
 
         // user online_user = new user(etName.getText());
 
@@ -105,15 +105,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        advisorLogin.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "advisor login test", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, Advisor_Login.class);
-                MainActivity.this.startActivity(intent);
-
-            }
-        });
+//        advisorLogin.setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "advisor login test", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(MainActivity.this, Advisor_Login.class);
+//                MainActivity.this.startActivity(intent);
+//
+//            }
+//        });
 
 
 
@@ -146,5 +146,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+    }
+
+    public String MD5(String md5){
+        try{
+
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i< array.length; ++i){
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString();
+        }
+        catch (java.security.NoSuchAlgorithmException e){
+        }
+        return null;
     }
 }

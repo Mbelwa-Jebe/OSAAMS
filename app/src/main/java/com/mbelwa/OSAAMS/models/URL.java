@@ -18,5 +18,12 @@ public class URL {
     public static final String GET_ADVISOR_URL = ROOT_URL + "get_advisors.php";
     public static final String GET_FAQS_URL = ROOT_URL + "get_faqs.php";
   public static final String UPDATE_REPORT_URL = ROOT_URL + "update_report.php";
+  public static final String STUDENT_DASHBOARD_URL = ROOT_URL + "student_dashboard.php";
+  public static final String ADVISOR_DASHBOARD_URL = ROOT_URL + "advisor_dashboard.php";
+  public static final String INSERT_MESSAGES_STUDENT_URL = ROOT_URL + "insert_messages_student.php";
+  public static final String INSERT_MESSAGES_ADVISOR_URL = ROOT_URL + "insert_messages_advisor.php";
+  public static final String GET_MESSAGES_URL = ROOT_URL + "get_messages.php";
+  public static final String RESET_PASS_STUDENT = ROOT_URL + "reset_password_student.php";
+  public static final String RESET_PASS_ADVISOR = ROOT_URL + "reset_password_advisor.php";
 
 }

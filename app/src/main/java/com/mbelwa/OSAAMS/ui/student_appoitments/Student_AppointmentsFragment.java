@@ -137,44 +137,44 @@ public class Student_AppointmentsFragment extends Fragment {
                 else {
 
 
-                post_url1 = URL.ADD_AP_STUDENT_URL;
-                StringRequest stringRequest1 = new StringRequest(Request.Method.POST, post_url1, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (response.trim().equals("success")) {
-                            Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                    post_url1 = URL.ADD_AP_STUDENT_URL;
+                    StringRequest stringRequest1 = new StringRequest(Request.Method.POST, post_url1, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.trim().equals("success")) {
+                                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
 
-                        } else {
-                            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
+                            } else {
+                                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                             }
+
                         }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> map = new HashMap<>();
-                        map.put(KEY_REGNO, registration_no);
-                        map.put(KEY_REQUESTINFO, request_info);
-                        return map;
-                    }
+                    },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
 
-                };
-                RequestQueue requestQueue1 = Volley.newRequestQueue(getContext());
-                requestQueue1.add(stringRequest1);
+                                }
+                            }
+                    ) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> map = new HashMap<>();
+                            map.put(KEY_REGNO, registration_no);
+                            map.put(KEY_REQUESTINFO, request_info);
+                            return map;
+                        }
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setReorderingAllowed(false);
-                transaction.detach(Student_AppointmentsFragment.this).attach(Student_AppointmentsFragment.this).commitAllowingStateLoss();
+                    };
+                    RequestQueue requestQueue1 = Volley.newRequestQueue(getContext());
+                    requestQueue1.add(stringRequest1);
 
-            }
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.setReorderingAllowed(false);
+                    transaction.detach(Student_AppointmentsFragment.this).attach(Student_AppointmentsFragment.this).commitAllowingStateLoss();
+
+                }
             }
         });
     }

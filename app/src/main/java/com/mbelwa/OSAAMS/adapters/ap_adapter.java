@@ -62,12 +62,7 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
         holder.ap_info.setText(appointment.getRequest_info());
         holder.ap_response.setText(appointment.getResponse());
 
-        holder.editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appointment.getAppointment_id();
-            }
-        });
+
 
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +92,6 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
             ap_studentid = itemView.findViewById(R.id.ap_studentid);
             ap_time = itemView.findViewById(R.id.ap_date);
 
-            editBtn = itemView.findViewById(R.id.edit_ap);
             deleteBtn = itemView.findViewById(R.id.delete_ap);
         }
     }

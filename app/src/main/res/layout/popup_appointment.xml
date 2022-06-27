@@ -10,39 +10,55 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        
-        <RelativeLayout
-            android:padding="25dp"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="25dp">
 
             <TextView
-                android:layout_width="wrap_content"
                 android:id="@+id/ap_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="Enter Request Info"
-                android:textSize="18sp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"/>
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/requstinfo_id"
-                android:layout_below="@id/ap_tittle"
                 android:layout_width="match_parent"
-                android:hint="Request information"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ap_tittle"
+                android:hint="Request information" />
+
+            <EditText
+                android:id="@+id/request_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="request date here"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/request_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="request time here"
+                android:inputType="time" />
 
             <Button
                 android:id="@+id/ap_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/requstinfo_id"
-                android:text="SUBMIT"
                 android:layout_marginTop="9dp"
                 android:background="@color/design_default_color_primary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:text="SUBMIT" />
 
 
-
-        </RelativeLayout>
+        </LinearLayout>
         
     </androidx.cardview.widget.CardView>
 </LinearLayout>

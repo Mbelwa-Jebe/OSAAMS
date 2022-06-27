@@ -38,7 +38,7 @@ public class Advisor_adapter extends RecyclerView.Adapter<Advisor_adapter.ViewHo
         Advisor advisor = list.get(position);
         holder.advisor_fname.setText(advisor.getAdvisor_fname());
         holder.advisor_lname.setText(advisor.getAdvisor_lname());
-        holder.advisor_id.setText(advisor.getAdvisor_id());
+        holder.advisor_id.setText(advisor.getContacts());
         holder.advisor_office.setText(advisor.getAdvisor_office());
 
     }

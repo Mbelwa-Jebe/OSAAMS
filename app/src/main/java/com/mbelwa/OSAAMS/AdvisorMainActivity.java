@@ -140,6 +140,15 @@ public class AdvisorMainActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.ad_reset_password:
+
+                return true;
+
+            case R.id.ad_user_manual:
+
+                return true;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

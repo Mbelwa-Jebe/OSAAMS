@@ -6,4 +6,15 @@
         android:orderInCategory="100"
         android:title="Logout"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/student_reset_password"
+        android:orderInCategory="100"
+        android:title="Reset Password"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/student_user_manual"
+        android:orderInCategory="100"
+        android:title="User Manual"
+        app:showAsAction="never" />
 </menu>
