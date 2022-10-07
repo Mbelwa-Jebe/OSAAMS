@@ -29,7 +29,7 @@ public class Message_adapter_advisor extends RecyclerView.Adapter<Message_adapte
 
         Message message = list.get(position);
 
-        if (message.getMessage_from() == "advisor") {
+        if (message.getMessage_from().equals("advisor")) {
             return SELF;
         }
 

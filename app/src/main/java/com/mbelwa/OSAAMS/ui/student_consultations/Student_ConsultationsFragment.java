@@ -70,13 +70,7 @@ public class Student_ConsultationsFragment extends Fragment {
         consultationsViewModel =
                 ViewModelProviders.of(this).get(Student_consultationsViewModel.class);
         View root = inflater.inflate(R.layout.student_fragment_consultations, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
-        consultationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-               // textView.setText(s);
-            }
-        });
+
 
         recyclerView = (RecyclerView) root.findViewById(R.id.student_report_recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
@@ -219,7 +213,7 @@ public class Student_ConsultationsFragment extends Fragment {
                 };
                 student_report_adapter.notifyDataSetChanged();
                 refreshFragment();
-
+                    getReports();
                 RequestQueue requestQueue5 = Volley.newRequestQueue(getContext());
                 requestQueue5.add(stringRequest5);
             }

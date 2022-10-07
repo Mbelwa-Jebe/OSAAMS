@@ -37,9 +37,9 @@
 
     <fragment
         android:id="@+id/advisor_nav_faqs"
-        android:name="com.mbelwa.OSAAMS.ui.advisor_faqs.AdvisorFaqsFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_chatRoom.AdvisorChatRoomFragment"
         android:label="FAQs"
-        tools:layout="@layout/advisor_fragment_faqs" />
+        tools:layout="@layout/advisor_fragment_chat_room" />
 
     <fragment
         android:id="@+id/advisor_bottom_home"
@@ -49,9 +49,9 @@
 
     <fragment
         android:id="@+id/advisor_bottom_dashboard"
-        android:name="com.mbelwa.OSAAMS.ui.advisor_dashboard.AdvisorDashboardFragment"
+        android:name="com.mbelwa.OSAAMS.ui.advisor_student_information.AdvisorStudent_InformationFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/advisor_fragment_dashboard" />
+        tools:layout="@layout/advisor_fragment_student_information" />
 
     <fragment
         android:id="@+id/advisor_bottom_notifications"

@@ -29,10 +29,7 @@
             android:title="Chats" />
 
 
-        <item
-            android:id="@+id/advisor_nav_faqs"
-            android:icon="@drawable/ic_menu_send"
-            android:title="FAQs" />
+
     </group>
 
 

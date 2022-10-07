@@ -57,10 +57,12 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final ap_adapter.ViewHolder holder, final int position) {
         final Appointment appointment = list.get(position);
-        holder.ap_time.setText(appointment.getTimestamp());
+        holder.ap_date.setText(appointment.getTimestamp());
         holder.ap_studentid.setText(appointment.getStudent_id());
         holder.ap_info.setText(appointment.getRequest_info());
         holder.ap_response.setText(appointment.getResponse());
+        holder.ap_time.setText(appointment.getAp_time());
+        holder.ap_dest_date.setText(appointment.getAp_date());
 
 
 
@@ -82,7 +84,7 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView ap_info,ap_response,ap_studentid,ap_time;
+        public TextView ap_info,ap_response,ap_studentid,ap_date,ap_dest_date,ap_time;
         public ImageButton editBtn,deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -90,8 +92,9 @@ public class ap_adapter extends RecyclerView.Adapter<ap_adapter.ViewHolder>{
             ap_info = itemView.findViewById(R.id.ap_requestinfo);
             ap_response = itemView.findViewById(R.id.ap_status);
             ap_studentid = itemView.findViewById(R.id.ap_studentid);
-            ap_time = itemView.findViewById(R.id.ap_date);
-
+            ap_date = itemView.findViewById(R.id.ap_date);
+            ap_dest_date= itemView.findViewById(R.id.ap_destinate_date);
+            ap_time = itemView.findViewById(R.id.ap_time);
             deleteBtn = itemView.findViewById(R.id.delete_ap);
         }
     }

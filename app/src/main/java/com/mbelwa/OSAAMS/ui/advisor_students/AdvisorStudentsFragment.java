@@ -48,13 +48,7 @@ public class AdvisorStudentsFragment extends Fragment {
         advisorstudentsViewModel =
                 ViewModelProviders.of(this).get(AdvisorStudentsViewModel.class);
         View root = inflater.inflate(R.layout.advisor_fragment_students, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        advisorstudentsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
 
         recyclerView = (RecyclerView)root.findViewById(R.id.advisor_student_recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);

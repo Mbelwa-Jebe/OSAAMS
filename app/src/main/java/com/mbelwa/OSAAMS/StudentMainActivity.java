@@ -181,10 +181,10 @@ public class StudentMainActivity extends AppCompatActivity {
                 createResetPassoworddialog();
                 return true;
 
-            case R.id.student_user_manual:
-                createUserManualDialog();
+//            case R.id.student_user_manual:
+//                createUserManualDialog();
 
-                return true;
+//                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

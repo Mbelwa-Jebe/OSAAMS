@@ -1,8 +1,8 @@
 package com.mbelwa.OSAAMS.models;
 
 public class URL {
-    private static final String ROOT_URL = "http://169.254.147.149:88/AcademicAdvisor/";
-  //  private static final String ROOT_URL = "http://192.168.43.64:88/AcademicAdvisor/";
+   // private static final String ROOT_URL = "http://192.168.143.112/AcademicAdvisor/";
+   private static final String ROOT_URL = "http://192.168.43.129:88/AcademicAdvisor/";
     public static final String LOGIN_URL = ROOT_URL + "login2.php";
     public static final String GET_AP_URL = ROOT_URL + "get_appointments.php";
     public static final String GET_REPORT_URL = ROOT_URL + "get_reports.php";
@@ -25,5 +25,6 @@ public class URL {
   public static final String GET_MESSAGES_URL = ROOT_URL + "get_messages.php";
   public static final String RESET_PASS_STUDENT = ROOT_URL + "reset_password_student.php";
   public static final String RESET_PASS_ADVISOR = ROOT_URL + "reset_password_advisor.php";
+  public static final String GET_ADVISOR_THREADS = ROOT_URL + "get_advisor_threads.php";
 
 }

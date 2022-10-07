@@ -1,9 +1,12 @@
 package com.mbelwa.OSAAMS.ui.student_home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -42,6 +45,7 @@ public class Student_HomeFragment extends Fragment {
     private Student_HomeViewModel homeViewModel;
     private List<Student_dashboard> list;
     public String registration_no;
+    public Button aris,ptms,fyp,udsm,elibrary,lms;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -62,6 +66,63 @@ public class Student_HomeFragment extends Fragment {
 
         StudentMainActivity studentMainActivity = (StudentMainActivity) getActivity();
         registration_no = studentMainActivity.getRegno();
+
+        aris = (Button) root.findViewById(R.id.aris);
+        ptms = (Button) root.findViewById(R.id.ptms);
+        fyp = (Button) root.findViewById(R.id.fypportal);
+        udsm = (Button) root.findViewById(R.id.udsm);
+        lms = (Button) root.findViewById(R.id.lms);
+
+        aris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://aris3.udsm.ac.tz"));
+                getActivity().startActivity(i);
+            }
+        });
+
+        ptms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://ptms.coict.udsm.ac.tz"));
+                getActivity().startActivity(i);
+            }
+        });
+
+
+        fyp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://fyp.udsm.ac.tz"));
+                getActivity().startActivity(i);
+            }
+        });
+
+
+        udsm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://udsm.ac.tz"));
+                getActivity().startActivity(i);
+            }
+        });
+
+
+
+
+
+        lms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://lms.udsm.ac.tz"));
+                getActivity().startActivity(i);
+            }
+        });
 
         getStudentDashbord();
         return root;

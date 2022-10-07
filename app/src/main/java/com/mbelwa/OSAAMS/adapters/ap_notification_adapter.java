@@ -57,10 +57,12 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
     public void onBindViewHolder(@NonNull final ap_notification_adapter.ViewHolder holder, int position) {
 
         final Appointment appointment = list.get(position);
-        holder.ap_time.setText(appointment.getTimestamp());
+        holder.ap_time.setText(appointment.getTimestamp().trim());
         holder.ap_from.setText(appointment.getAp_from());
         holder.ap_info.setText(appointment.getRequest_info());
         holder.ap_response.setText(appointment.getResponse());
+        holder.ap_dest_date.setText(appointment.getAp_date());
+        holder.ap_dest_time.setText(appointment.getAp_time());
 
         holder.acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +94,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView ap_info,ap_response,ap_from,ap_time;
+        public TextView ap_info,ap_response,ap_from,ap_time,ap_dest_date,ap_dest_time;
         public ImageButton acceptBtn,rejectBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -101,6 +103,8 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
             ap_response = itemView.findViewById(R.id.ap_notification_status);
             ap_from = itemView.findViewById(R.id.ap_from);
             ap_time = itemView.findViewById(R.id.ap_notification_date);
+            ap_dest_date = itemView.findViewById(R.id.ap_notification_dest_date);
+            ap_dest_time = itemView.findViewById(R.id.ap_notification_time);
 
             acceptBtn = itemView.findViewById(R.id.confirm_ap);
             rejectBtn = itemView.findViewById(R.id.reject_ap);
@@ -117,8 +121,8 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
-                            Toast.makeText(context, "successful accepted", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
+                        refresh();
                         } else {
                             Toast.makeText(context, "not successful", Toast.LENGTH_SHORT).show();
                         }
@@ -142,7 +146,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
         requestQueue.add(stringRequest);
         notifyItemRemoved(appoint_id);
         notifyItemRangeChanged(appoint_id,list.size());
-        refresh();
+       // refresh();
 
 
 
@@ -157,8 +161,8 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
                     @Override
                     public void onResponse(String response) {
                         if (response.trim().equals("success")) {
-                            Toast.makeText(context, "successful accepted", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(context, "rejected", Toast.LENGTH_SHORT).show();
+                            refresh();
                         } else {
                             Toast.makeText(context, "not successful", LENGTH_LONG).show();
                         }
@@ -182,7 +186,7 @@ public class ap_notification_adapter extends RecyclerView.Adapter<ap_notificatio
         requestQueue.add(stringRequest);
         notifyItemRemoved(appoint_id);
         notifyItemRangeChanged(appoint_id,list.size());
-        refresh();
+       // refresh();
 
 
 

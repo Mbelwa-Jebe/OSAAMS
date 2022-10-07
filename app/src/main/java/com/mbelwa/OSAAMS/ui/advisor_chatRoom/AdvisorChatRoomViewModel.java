@@ -1,14 +1,14 @@
-package com.mbelwa.OSAAMS.ui.advisor_faqs;
+package com.mbelwa.OSAAMS.ui.advisor_chatRoom;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AdvisorFaqsViewModel extends ViewModel {
+public class AdvisorChatRoomViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public AdvisorFaqsViewModel() {
+    public AdvisorChatRoomViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is send fragment");
     }

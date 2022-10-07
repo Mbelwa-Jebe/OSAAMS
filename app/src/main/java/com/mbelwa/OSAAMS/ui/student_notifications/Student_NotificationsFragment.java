@@ -108,6 +108,8 @@ public class Student_NotificationsFragment extends Fragment {
                         appointment.setTimestamp(apObject.getString("time_stamp"));
                         appointment.setAp_to(apObject.getString("ap_to"));
                         appointment.setAp_from(apObject.getString("ap_from"));
+                        appointment.setAp_date(apObject.getString("ap_date"));
+                        appointment.setAp_time(apObject.getString("ap_time"));
 
                         if (registration_no.equals(appointment.getAp_to())) {
                             list.add(appointment);
@@ -145,16 +147,7 @@ public class Student_NotificationsFragment extends Fragment {
         RequestQueue requestQueue9 = Volley.newRequestQueue(getContext());
         requestQueue9.add(jsonObjectRequest);
 
-        final Handler handler = new Handler();
-        final  int delay = 1000;
 
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                   refreshFragment();
-//                handler.postDelayed(this,delay);
-//            }
-//        },delay);
     }
     //refresh the changes
     public void refreshFragment(){

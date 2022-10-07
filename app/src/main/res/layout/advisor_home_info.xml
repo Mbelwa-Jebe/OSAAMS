@@ -11,14 +11,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_bubble_white"
                     android:orientation="vertical">
 
                     <TextView
@@ -42,6 +46,7 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,12 +66,13 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="200dp"
                 android:layout_height="150dp"
-                android:background="@color/colorAccent">
+                android:layout_marginRight="10dp"
+                android:background="@drawable/bg_bubble_gray">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background"
+                    android:background="@drawable/bg_bubble_gray"
                     android:orientation="vertical"
                     android:paddingRight="10dp">
 
@@ -74,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/bg_bubble_white"
+                        android:background="@drawable/bg_bubble_gray"
                         android:gravity="center"
                         android:text="Appointments Received"
                         android:textSize="24sp"
@@ -85,7 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/bg_bubble_white"
+                        android:background="@drawable/bg_bubble_gray"
                         android:paddingRight="10dp"
                         android:text="5"
                         android:textAlignment="center"
@@ -104,14 +110,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_bubble_white"
+                    android:background="@drawable/bg_bubble_gray"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/bg_bubble_white"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_bubble_gray"
                         android:gravity="center"
                         android:text="Consultations"
                         android:textSize="24sp"
@@ -122,8 +129,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_bubble_white"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/bg_bubble_gray"
                         android:text="5"
                         android:textAlignment="center"
                         android:textSize="36sp"

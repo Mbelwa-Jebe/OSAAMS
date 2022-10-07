@@ -45,7 +45,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="@drawable/bg_bubble_gray"
                 android:orientation="horizontal"
                 android:paddingLeft="3dp"
@@ -62,7 +62,9 @@
                     android:focusableInTouchMode="true"
                     android:hint="Enter message"
                     android:imeOptions="actionDone"
-                    android:inputType="textPersonName"
+                    android:maxLines="4"
+                    android:maxLength="2000"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:singleLine="true" />
@@ -71,9 +73,13 @@
                     android:id="@+id/btn_send"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_bubble_gray"
+                    android:gravity="top"
                     android:text="SEND"
+                    android:textAlignment="center"
                     android:textColor="@color/colorAccent"
                     android:textSize="16dp" />
 

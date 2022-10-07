@@ -8,10 +8,26 @@ public class Appointment {
     private String student_lname;
     private String advisor_fname,student_id;
     private String advisor_lname,advisor_id;
-    private String timestamp,ap_from,ap_to;
+    private String timestamp,ap_from,ap_to,ap_date,ap_time;
 
     public String getAp_from() {
         return ap_from;
+    }
+
+    public String getAp_date() {
+        return ap_date;
+    }
+
+    public void setAp_date(String ap_date) {
+        this.ap_date = ap_date;
+    }
+
+    public String getAp_time() {
+        return ap_time;
+    }
+
+    public void setAp_time(String ap_time) {
+        this.ap_time = ap_time;
     }
 
     public void setAp_from(String ap_from) {

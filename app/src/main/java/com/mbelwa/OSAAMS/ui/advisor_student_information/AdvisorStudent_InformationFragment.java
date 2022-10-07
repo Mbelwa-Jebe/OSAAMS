@@ -1,4 +1,4 @@
-package com.mbelwa.OSAAMS.ui.student_dashboard;
+package com.mbelwa.OSAAMS.ui.advisor_student_information;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-public class Student_DashboardFragment extends Fragment {
+public class AdvisorStudent_InformationFragment extends Fragment {
 
-    private Student_DashboardViewModel dashboardViewModel;
+    private AdvisorStudentInformationViewModel advisorStudentInformationViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(Student_DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.student_fragment_dashboard, container, false);
+        advisorStudentInformationViewModel =
+                ViewModelProviders.of(this).get(AdvisorStudentInformationViewModel.class);
+        View root = inflater.inflate(R.layout.advisor_fragment_student_information, container, false);
 
         return root;
     }

@@ -3,12 +3,20 @@ package com.mbelwa.OSAAMS;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
@@ -18,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.mbelwa.OSAAMS.R;
+import com.mbelwa.OSAAMS.models.URL;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,7 +34,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AdvisorMainActivity extends AppCompatActivity {
 
@@ -37,6 +54,15 @@ public class AdvisorMainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavView;
     private CoordinatorLayout contentView;
     public String registration_no;
+
+    public AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialogpassword,userManual;
+    private EditText oldpass,newpass,confirmNewpass;
+    private Button reset,cancel,done;
+
+    public static  final String KEY_REGNO="registration_no";
+    public static  final String KEY_OLD_PASSWORD="oldpass2";
+    public static  final String KEY_PASSWORD="password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,12 +167,13 @@ public class AdvisorMainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.ad_reset_password:
+                createResetPassoworddialog();
 
                 return true;
 
-            case R.id.ad_user_manual:
-
-                return true;
+//            case R.id.ad_user_manual:
+//
+//                return true;
 
 
             default:
@@ -177,6 +204,146 @@ public class AdvisorMainActivity extends AppCompatActivity {
 
     public String getRegno(){
         return registration_no;
+    }
+
+    public void createResetPassoworddialog(){
+        dialogBuilder = new AlertDialog.Builder(AdvisorMainActivity.this);
+        View view = getLayoutInflater().inflate(R.layout.reset_password_dialog,null);
+        oldpass = (EditText) view.findViewById(R.id.old_password);
+        newpass = (EditText) view.findViewById(R.id.new_password);
+        confirmNewpass = (EditText) view.findViewById(R.id.confirm_password);
+        reset = (Button) view.findViewById(R.id.psd_submit);
+        cancel = (Button) view.findViewById(R.id.psd_cancel);
+        dialogBuilder.setView(view);
+        dialogpassword = dialogBuilder.create();
+        dialogpassword.show();
+        final List<String> errorList = new ArrayList<String>();
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogpassword.dismiss();
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPassword();
+            }
+
+            public void resetPassword() {
+                final String old_pass = oldpass.getText().toString();
+                final String pass = newpass.getText().toString();
+                final String confirmPass = confirmNewpass.getText().toString();
+                if (!isValid(pass, confirmPass, errorList)){
+                    for (String error : errorList){
+                        confirmNewpass.setError(error);
+                    }
+
+                }
+
+                else {
+                    // Upload to database here
+
+                    String reset_pass = URL.RESET_PASS_ADVISOR;
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, reset_pass,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    if (response.trim().equals("success")) {
+                                        Toast.makeText(getApplicationContext(), "successful password changed", Toast.LENGTH_SHORT).show();
+                                        dialogpassword.dismiss();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "not successful", Toast.LENGTH_SHORT).show();
+                                        confirmNewpass.setError("Your old Password is incorrect");
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
+                                }
+                            }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> map = new HashMap<>();
+                            map.put(KEY_REGNO, registration_no);
+                            map.put(KEY_PASSWORD, MD5(confirmPass));
+                            map.put(KEY_OLD_PASSWORD, MD5(old_pass));
+                            return map;
+                        }
+
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    requestQueue.add(stringRequest);
+
+
+                }
+
+            }
+
+            public boolean isValid(String pass, String confirmPass, List<String> errorList) {
+                Pattern specialCharPatten = Pattern.compile("[^a-z0-9]",Pattern.CASE_INSENSITIVE);
+                Pattern upperCasePatten = Pattern.compile("[A-Z]");
+                Pattern lowerCasePatten = Pattern.compile("[a-z]");
+                Pattern digitCasePatten = Pattern.compile("[0-9]");
+                errorList.clear();
+                boolean flag = true;
+                if (!pass.equals(confirmPass)){
+                    errorList.add("Password and confirm password does not match");
+                    flag = false;
+                }
+
+                if (!pass.equals(confirmPass)){
+                    errorList.add("Password and confirm password does not match");
+                    flag = false;
+                }
+
+                if (pass.length() < 8){
+                    errorList.add("Password lenght must be at least 8 characters");
+                    flag = false;
+                }
+
+                if (!specialCharPatten.matcher(pass).find()){
+                    errorList.add("Password must at least have one special character");
+                    flag = false;
+                }
+
+                if (!upperCasePatten.matcher(pass).find()){
+                    errorList.add("Password must include uppercase letter");
+                    flag = false;
+                }
+
+                if (!lowerCasePatten.matcher(pass).find()){
+                    errorList.add("Password must include lowercase letter");
+                    flag = false;
+                }
+
+                if (!digitCasePatten.matcher(pass).find()){
+                    errorList.add("Password must include digit character");
+                    flag = false;
+                }
+                return flag;
+            }
+        });
+    }
+
+    public String MD5(String md5){
+        try{
+
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i< array.length; ++i){
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString();
+        }
+        catch (java.security.NoSuchAlgorithmException e){
+        }
+        return null;
     }
 
 }

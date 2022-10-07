@@ -20,30 +20,77 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/aris"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ARIS3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.083" />
+
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="!!DO NOT FORGET TO CHANGE DEFAULT PASSWORD!!"
-        android:textColor="@color/design_default_color_error"
+        android:text="USEFUL LINKS"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/student_home_recycler"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.065" />
 
-    <TextView
-        android:id="@+id/textView17"
+    <Button
+        android:id="@+id/fypportal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ACCESS CHANGE PASSWORD ON THE RIGHT CORNER MENU"
-        android:textColor="@color/design_default_color_error"
+        android:text="FYP PORTAL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toEndOf="@+id/ptms"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <Button
+        android:id="@+id/ptms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="PTMS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toEndOf="@+id/aris"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <Button
+        android:id="@+id/udsm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UDSM"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.292" />
+
+    <Button
+        android:id="@+id/lms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LMS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintStart_toEndOf="@+id/udsm"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.292" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

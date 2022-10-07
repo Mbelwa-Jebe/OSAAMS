@@ -1,14 +1,19 @@
 package com.mbelwa.OSAAMS.ui.advisor_appointments;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,12 +36,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -49,15 +56,21 @@ public class AdvisorAppointmentsFragment extends Fragment {
 
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private EditText requstinfo,studentid;
+    private EditText requstinfo,studentid,req_date,req_time;
     private Button submitap;
     private RecyclerView recyclerView;
     private com.mbelwa.OSAAMS.adapters.ap_adapter ap_adapter;
     //public TextView regnoap;
-    public String registration_no, request_info,student_id, post_url1;
+    public String registration_no, request_info,student_id, post_url1,ap_date,ap_time;
     public static final String KEY_REGNO = "registration_no";
     public static final String KEY_REQUESTINFO = "request_info";
     public static final String KEY_STUDENTID = "student_id";
+    public static  final String KEY_AP_DATE="appointment_date";
+    public static final String KEY_AP_TIME="appointment_time";
+    public DatePickerDialog datePickerDialog;
+    public TimePickerDialog timePickerDialog;
+
+
 
     private List<Appointment> list;
 
@@ -112,6 +125,50 @@ public class AdvisorAppointmentsFragment extends Fragment {
         requstinfo = (EditText) view.findViewById(R.id.requstinfo_id_ap);
         studentid = (EditText) view.findViewById(R.id.student_id_ap);
         submitap = (Button) view.findViewById(R.id.ad_submit_ap);
+        req_date = (EditText) view.findViewById(R.id.ad_date_ap);
+        req_time = (EditText) view.findViewById(R.id.ad_time_ap);
+
+        req_date.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                final int mYear = c.get(Calendar.YEAR); // current year
+                final int mMonth = c.get(Calendar.MONTH); // current month
+                final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        req_date.setText(mYear+"-"+mMonth+"-"+mDay);
+                    }
+                },mYear,mMonth,mDay);
+                datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+                datePickerDialog.show();
+
+            }
+        });
+
+        req_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                final int mHour = c.get(Calendar.HOUR_OF_DAY); // current year
+                final int mMinutes = c.get(Calendar.MINUTE); // current month
+
+                timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        req_time.setText(mHour+":"+minute);
+                    }
+                },mHour,mMinutes,true);
+                timePickerDialog.show();
+
+            }
+        });
+
+
 
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
@@ -129,6 +186,8 @@ public class AdvisorAppointmentsFragment extends Fragment {
             private void submitapAppointment(View v) {
                 request_info = requstinfo.getText().toString().trim();
                 student_id = studentid.getText().toString().trim();
+                ap_date = req_date.getText().toString().trim();
+                ap_time = req_date.getText().toString().trim();
                 if (request_info.length() == 0) {
                     requstinfo.setError("Fill Request info first");
 
@@ -146,7 +205,15 @@ public class AdvisorAppointmentsFragment extends Fragment {
                             Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                             dialog.dismiss();
 
-                        } else {
+                        }
+
+                        else if (ap_date.length() == 0){
+                            req_date.setError("fill date first");
+                        }
+                        else if (ap_time.length() == 0){
+                            req_time.setError("fill time first");
+                        }
+                        else {
                             Toast.makeText(getContext(), "error", Toast.LENGTH_LONG).show();
                         }
 
@@ -165,6 +232,8 @@ public class AdvisorAppointmentsFragment extends Fragment {
                         map.put(KEY_REGNO, registration_no);
                         map.put(KEY_REQUESTINFO, request_info);
                         map.put(KEY_STUDENTID, student_id);
+                        map.put(KEY_AP_DATE, request_info);
+                        map.put(KEY_AP_TIME, student_id);
                         return map;
                     }
 
@@ -186,7 +255,7 @@ public class AdvisorAppointmentsFragment extends Fragment {
                 // t.setAllowOptimization(false);
                 // t.detach(Context.th).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
 
-
+getAppointment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.setReorderingAllowed(false);
                 transaction.detach(AdvisorAppointmentsFragment.this).attach(AdvisorAppointmentsFragment.this).commitAllowingStateLoss();
@@ -224,6 +293,8 @@ public class AdvisorAppointmentsFragment extends Fragment {
                         appointment.setStudent_lname(apObject.getString("student_lname"));
                         appointment.setTimestamp(apObject.getString("time_stamp"));
                         appointment.setAp_from(apObject.getString("ap_from"));
+                        appointment.setAp_date(apObject.getString("ap_date"));
+                        appointment.setAp_time(apObject.getString("ap_time"));
 
                         if(registration_no.equals(appointment.getAp_from())){
                             list.add(appointment);

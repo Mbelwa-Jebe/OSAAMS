@@ -49,13 +49,7 @@ public class AdvisorNotificationsFragment extends Fragment {
         advisorHomeNotificationsViewModel =
                 ViewModelProviders.of(this).get(AdvisorHomeNotificationsViewModel.class);
         View root = inflater.inflate(R.layout.advisor_fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        advisorHomeNotificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
 
         recyclerView = (RecyclerView) root.findViewById(R.id.advisor_notification_recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
@@ -99,6 +93,8 @@ public class AdvisorNotificationsFragment extends Fragment {
                         appointment.setTimestamp(apObject.getString("time_stamp"));
                         appointment.setAp_to(apObject.getString("ap_to"));
                         appointment.setAp_from(apObject.getString("ap_from"));
+                        appointment.setAp_date(apObject.getString("ap_date"));
+                        appointment.setAp_time(apObject.getString("ap_time"));
 
                         if(registration_no.equals(appointment.getAp_to())){
                             list.add(appointment);
@@ -141,6 +137,7 @@ public class AdvisorNotificationsFragment extends Fragment {
     }
 
     public void refreshFragment(){
+        //refresh changes
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setReorderingAllowed(false);
         transaction.detach(this).attach(this).commitAllowingStateLoss();
